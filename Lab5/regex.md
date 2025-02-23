@@ -4,7 +4,6 @@ import re
 def match_pattern(s):
     return bool(re.fullmatch(r"a*b*", s))
 
-# Test cases
 test_strings = ["a", "ab", "abb", "abbb", "ac", "b", "ba", "abc"]
 for s in test_strings:
     print(f"{s}: {match_pattern(s)}")
