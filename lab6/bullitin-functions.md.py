@@ -1,105 +1,52 @@
 #esep 1
-import os
 
-def list_contents(path):
-    directories = [d for d in os.listdir(path) if os.path.isdir(os.path.join(path, d))]
-    files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
-    all_items = os.listdir(path)
-    
-    return directories, files, all_items
+from functools import reduce
 
-path = "."  # Change this to the desired path
-dirs, files, all_items = list_contents(path)
+numbers = [2, 3, 4, 5]
+result = reduce(lambda x, y: x * y, numbers)
 
-print("Directories:", dirs)
-print("Files:", files)
-print("All items:", all_items)
+print(result)
 
 #esep 2
 
-import os
+def count_case(s):
+    upper = sum(1 for c in s if c.isupper())
+    lower = sum(1 for c in s if c.islower())
+    return upper, lower
 
-def check_access(path):
-    return {
-        "Exists": os.path.exists(path),
-        "Readable": os.access(path, os.R_OK),
-        "Writable": os.access(path, os.W_OK),
-        "Executable": os.access(path, os.X_OK),
-    }
+text = "Hello World"
+upper_count, lower_count = count_case(text)
 
-path = "example.txt"  # Change this to the desired path
-access_info = check_access(path)
-
-for key, value in access_info.items():
-    print(f"{key}: {value}")
+print("Upper case letters:", upper_count)
+print("Lower case letters:", lower_count)
 
 #esep 3
 
-import os
+def is_palindrome(s):
+    return s == s[::-1]
 
-def path_info(path):
-    if os.path.exists(path):
-        return {
-            "Directory": os.path.dirname(path),
-            "Filename": os.path.basename(path),
-        }
-    else:
-        return "Path does not exist."
-
-path = "example.txt"  # Change this to the desired path
-info = path_info(path)
-
-print(info)
+text = "madam"
+print(is_palindrome(text))
 
 #esep 4
 
-def count_lines(filename):
-    with open(filename, 'r') as file:
-        return sum(1 for _ in file)
+import time
+import math
 
-filename = "example.txt"  # Change this to the desired file
-print("Number of lines:", count_lines(filename))
+def delayed_sqrt(number, delay_ms):
+    time.sleep(delay_ms / 1000)
+    return math.sqrt(number)
+
+num = 25100
+delay = 2123
+
+result = delayed_sqrt(num, delay)
+print(f"Square root of {num} after {delay} milliseconds is {result}")
 
 #esep 5
 
-def write_list_to_file(filename, data):
-    with open(filename, 'w') as file:
-        file.writelines("\n".join(data))
+def all_true(t):
+    return all(t)
 
-data = ["Apple", "Banana", "Cherry"]
-filename = "output.txt"
-
-write_list_to_file(filename, data)
-
-#esep 6
-
-import string
-
-for letter in string.ascii_uppercase:
-    with open(f"{letter}.txt", "w") as file:
-        file.write(f"This is {letter}.txt")
-
-#esep 7 
-
-def copy_file(source, destination):
-    with open(source, 'r') as src, open(destination, 'w') as dest:
-        dest.write(src.read())
-
-source_file = "source.txt"  # Change this to the actual source file
-destination_file = "destination.txt"  # Change this to the desired destination file
-
-copy_file(source_file, destination_file)
-
-#esep 8
-
-import os
-
-def delete_file(path):
-    if os.path.exists(path) and os.access(path, os.W_OK):
-        os.remove(path)
-        print(f"{path} has been deleted.")
-    else:
-        print("File does not exist or access is denied.")
-
-file_path = "example.txt"  # Change this to the desired file path
-delete_file(file_path)
+t = (True, True, False)
+print(all_true(t))
